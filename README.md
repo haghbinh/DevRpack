@@ -14,6 +14,9 @@ Supported files and codes for the Talk:
 
 # Contents:
 ## 1. Introduction
+ * [Getting Started]
+ * [System setup]
+ * [The package within]
 ## 2. Package Structure
  * [Naming Your Package]
  * [Creating a Package]
