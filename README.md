@@ -14,7 +14,7 @@ Supported files and codes for the Talk:
 
 # Contents:
 ## 1. Introduction
-## 2. Introduction
+## 2. Package Structure
  * [Naming Your Package]
  * [Creating a Package]
  * [What Is a Package?]
@@ -24,6 +24,12 @@ Supported files and codes for the Talk:
  * [Package Metadata]
  * [Object Documentation]
  * [Namespace]
- * [Package Metadata]
- * [Object Documentation]
- 
+ * [External Data]
+ * [Compiled Code]
+ * [Git and GitHub]
+ * [Automated Checking]
+ ## 4. Releasing a Package
+ * [Version Number]
+ * [Backward Compatibility]
+ * [The Submission Process]
+ * [CRAN Policies]
