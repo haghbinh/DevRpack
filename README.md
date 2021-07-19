@@ -10,4 +10,4 @@ Supported files and codes for the Talk:
 ### [R packages](https://r-pkgs.org/)
 #### By: Hadley Wickham and Jenny Bryan
 
-<img src="img/cover.png" alt="Diffrent perspective of objects." width="250" height="350">
+<img src="img/cover.png" alt="Diffrent perspective of objects." width="250" height="320">
