@@ -8,5 +8,6 @@ Supported files and codes for the Talk:
 
 ## Reference:
 ### [R packages](https://r-pkgs.org/)
-By: Hadley Wickham and Jenny Bryan
-<img src="img/ISS-Logo.jpg" alt="Diffrent perspective of objects." width="250" height="150">
+#### By: Hadley Wickham and Jenny Bryan
+
+<img src="img/cover.png" alt="Diffrent perspective of objects." width="250" height="150">
