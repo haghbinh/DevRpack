@@ -1,2 +1,1 @@
-# DevRpack
-How to Develop an R Package 
+# How to Develop an R Package 
