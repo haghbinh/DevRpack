@@ -23,7 +23,7 @@ Supported files and codes for the Talk:
  * [What Is a Package?]
  * [What Is a Library?]
 ## 3. Package Components
- * [R Code](https://github.com/haghbinh/DevRpack/blob/main/html/R_Codes.html)
+ * [R Code](https://haghbinh.github.io/DevRpack/blob/main/html/R_Codes.html)
  * [Package Metadata]
  * [Object Documentation]
  * [Namespace]
