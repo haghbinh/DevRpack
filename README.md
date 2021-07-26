@@ -31,7 +31,7 @@ Supported files and codes for the Talk:
  * [Compiled Code]
  * [Git and GitHub]
  * [Automated Checking]
- ## 4. Releasing a Package
+## 4. Releasing a Package
  * [Version Number](https://haghbinh.github.io/DevRpack/html/R_Codes.html)
  * [Backward Compatibility]
  * [The Submission Process]
