@@ -31,6 +31,7 @@ Supported files and codes for the Talk:
  * [Compiled Code]
  * [Git and GitHub]
  * [Automated Checking]
+ 
  ## 4. Releasing a Package
  * [Version Number]
  * [Backward Compatibility]
