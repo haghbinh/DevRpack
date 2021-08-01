@@ -24,7 +24,7 @@ Supported files and codes for the Talk:
  * [What Is a Library?]
 ## 3. Package Components
  * [R Code](https://haghbinh.github.io/DevRpack/html/R_Codes.html)
- * [Package Metadata](https://soroushmdg.github.io/test/blob/main/package-meta-data.html)
+ * [Package Metadata](https://haghbinh.github.io/DevRpack/html/meta_data.html)
  * [Object Documentation]
  * [Namespace]
  * [External Data]
