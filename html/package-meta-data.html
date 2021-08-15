@@ -169,7 +169,7 @@ pre code {
 
 <div id="description" class="section level1">
 <h1>Package metadata</h1>
-<p>The job of the <code>DESCRIPTION</code> file is to store important metadata about your package. As time goes by and you start sharing your package with others, the metadata file becomes increasingly important because it specifies who can use it (the license) and whom to contact (you!) if there are any problems.</p>
+<p>The job of the <code>DESCRIPTION</code> file is to store important metadata about your package. It specifies who can use it (the license) and whom to contact (you!) if there are any problems.</p>
 <p>Every package must have a <code>DESCRIPTION</code>. In fact, it’s the defining feature of a package (RStudio and devtools consider any directory containing <code>DESCRIPTION</code> to be a package). To get you started, <code>usethis::create_package(&quot;mypackage&quot;)</code> automatically adds a bare-bones description file. The minimal description will vary a bit depending on your settings, but should look something like this:</p>
 <pre class="yaml"><code>Package: mypackage
 Title: What The Package Does (one line, title case required)
@@ -180,7 +180,7 @@ Description: What the package does (one paragraph)
 Depends: R (&gt;= 3.1.0)
 License: What license is it under?
 LazyData: true</code></pre>
-<p><code>DESCRIPTION</code> uses a simple file format called DCF, the Debian control format. You can see most of the structure in the simple example below. Each line consists of a <strong>field</strong> name and a value, separated by a colon. When values span multiple lines, they need to be indented:</p>
+<p>You can see most of the structure in the simple example below. Each line consists of a <strong>field</strong> name and a value, separated by a colon. When values span multiple lines, they need to be indented:</p>
 <pre class="yaml"><code>Description: The description of a package is usually long,
     spanning multiple lines. The second and subsequent lines
     should be indented, usually with four spaces.</code></pre>
@@ -198,9 +198,8 @@ LazyData: true</code></pre>
 <p>Both <code>Imports</code> and <code>Suggests</code> take a comma separated list of package names.</p>
 <p><code>Imports</code> and <code>Suggests</code> differ in their strength of dependency:</p>
 <ul>
-<li><p><code>Imports</code>: packages listed here <em>must</em> be present for your package to work. In fact, any time your package is installed, those packages will, if not already present, be installed on your computer (<code>devtools::load_all()</code> also checks that the packages are installed).</p>
-<p>Adding a package dependency here ensures that it’ll be installed. However, it does <em>not</em> mean that it will be attached along with your package (i.e., <code>library(x)</code>). The best practice is to explicitly refer to external functions using the syntax <code>package::function()</code>. This makes it very easy to identify which functions live outside of your package. This is especially useful when you read your code in the future.</p>
-<p>If you use a lot of functions from other packages this is rather verbose. There’s also a minor performance penalty associated with <code>::</code> (on the order of 5µs, so it will only matter if you call the function millions of times). You’ll learn about alternative ways to call functions in other packages in <a href="#imports">namespace imports</a>.</p>
+<li><p><code>Imports</code>: packages listed here <em>must</em> be present for your package to work. In fact, any time your package is installed, those packages will, if not already present, be installed on your computer.</p>
+<p>Adding a package dependency here ensures that it’ll be installed. However, it does <em>not</em> mean that it will be attached along with your package (i.e., <code>library(x)</code>). The best practice is to explicitly refer to external functions using the syntax <code>package::function()</code>.</p>
 <p>When you use import, package will be in your memory, but in suggest package will not be in memory.</p></li>
 <li><p><code>Suggests</code>: your package can use these packages, but doesn’t require them. You might use suggested packages for example datasets, to run tests, build vignettes, or maybe there’s only one function that needs the package.</p>
 <p>Packages listed in <code>Suggests</code> are not automatically installed along with your package. This means that you need to check if the package is available before using it (use <code>requireNamespace(x, quietly = TRUE)</code>). There are two basic scenarios:</p>
@@ -231,14 +230,11 @@ my_fun &lt;- function(a, b) {
 Suggests:
     MASS (&gt;= 7.3.0)</code></pre>
 <p>You almost always want to specify a minimum version rather than an exact version (<code>MASS (== 7.3.0)</code>). Since R can’t have multiple versions of the same package loaded at the same time, specifying an exact dependency dramatically increases the chance of conflicting versions.</p>
-<p>Versioning is most important when you release your package. Usually people don’t have exactly the same versions of packages installed that you do. If someone has an older package that doesn’t have a function your package needs, they’ll get an unhelpful error message. However, if you supply the version number, they’ll get a error message that tells them exactly what the problem is: an out of date package.</p>
-<p>Think carefully if you declare a minimum version. In some sense, the safest thing to do is to require a version greater than or equal to the package’s current version. For public work, this is most naturally defined as the current CRAN version of a package; private or personal projects may adopt some other convention. But it’s important to appreciate the implications for people who try to install your package: if their local installation doesn’t fulfill all of your requirements around versions, installation will either fail or force upgrades of these dependencies. This is desirable if your minimum version requirements are genuine, i.e. your package would be broken otherwise. But if your stated requirements have a less solid rationale, this may be unnecessarily conservative and inconvenient.</p>
 <p>There are three other fields that allow you to express more specialised dependencies:</p>
 <ul>
-<li><p><code>Depends</code>: Prior to the rollout of namespaces in R 2.14.0, <code>Depends</code> was the only way to “depend” on another package. Now, despite the name, you should almost always use <code>Imports</code>, not <code>Depends</code>. You’ll learn why, and when you should still use <code>Depends</code>, in <a href="#namespace">namespaces</a>.</p>
+<li><p><code>Depends</code>: Prior to the rollout of namespaces in R 2.14.0, <code>Depends</code> was the only way to “depend” on another package. Now, despite the name, you should almost always use <code>Imports</code>, not <code>Depends</code>.</p>
 <p>You can also use <code>Depends</code> to require a specific version of R, e.g. <code>Depends: R (&gt;= 3.4.0)</code>. Again, think carefully if you do this. This raises the same issues as setting a minimum version for a package you depend on, except the stakes are much higher when it comes to R itself. Users can’t simply consent to the necessary upgrade, so, if other packages depend on yours, your minimum version requirement for R can cause a cascade of package installation failures.</p></li>
-<li><p><code>LinkingTo</code>: packages listed here rely on C or C++ code in another package. You’ll learn more about <code>LinkingTo</code> in <a href="#src">compiled code</a>.</p></li>
-<li><p><code>Enhances</code>: packages listed here are “enhanced” by your package. Typically, this means you provide methods for classes defined in another package (a sort of reverse <code>Suggests</code>). But it’s hard to define what that means, so I don’t recommend using <code>Enhances</code>.</p></li>
+<li><p><code>LinkingTo</code>: packages listed here rely on C or C++ code in another package.</p></li>
 </ul>
 </div>
 </div>
@@ -268,9 +264,6 @@ Description: An implementation of the grammar of graphics in R. It combines
 <p>To identify the package’s author, and whom to contact if something goes wrong, use the <code>Authors@R</code> field. This field is unusual because it contains executable R code rather than plain text. Here’s an example:</p>
 <pre class="yaml"><code>Authors@R: person(&quot;Hadley&quot;, &quot;Wickham&quot;, email = &quot;hadley@rstudio.com&quot;,
   role = c(&quot;aut&quot;, &quot;cre&quot;))</code></pre>
-<pre class="r"><code>person(&quot;Hadley&quot;, &quot;Wickham&quot;, email = &quot;hadley@rstudio.com&quot;, 
-  role = c(&quot;aut&quot;, &quot;cre&quot;))
-#&gt; [1] &quot;Hadley Wickham &lt;hadley@rstudio.com&gt; [aut, cre]&quot;</code></pre>
 <p>This command says that both the author (aut) and the maintainer (cre) is Hadley Wickham, and that his email address is <code>hadley@rstudio.com</code>. The <code>person()</code> function has four main arguments:</p>
 <ul>
 <li><p>The name, specified by the first two arguments, <code>given</code> and <code>family</code> (these are normally supplied by position, not name). In English cultures, <code>given</code> (first name) comes before <code>family</code> (last name). In many cultures, this convention does not hold.</p></li>
@@ -289,10 +282,7 @@ Description: An implementation of the grammar of graphics in R. It combines
 <pre class="yaml"><code>Authors@R: c(
     person(&quot;Hadley&quot;, &quot;Wickham&quot;, email = &quot;hadley@rstudio.com&quot;, role = &quot;cre&quot;),
     person(&quot;Winston&quot;, &quot;Chang&quot;, email = &quot;winston@rstudio.com&quot;, role = &quot;aut&quot;))</code></pre>
-<p>Every package must have at least one author (aut) and one maintainer (cre) (they might be the same person). The creator must have an email address. These fields are used to generate the basic citation for the package (e.g. <code>citation(&quot;pkgname&quot;)</code>). Only people listed as authors will be included in the auto-generated citation. There are a few extra details if you’re including code that other people have written. Since this typically occurs when you’re wrapping a C library, it’s discussed in <a href="#src">compiled code</a>.</p>
-<p>As well as your email address, it’s also a good idea to list other resources available for help. You can list URLs in <code>URL</code>. Multiple URLs are separated with a comma. <code>BugReports</code> is the URL where bug reports should be submitted. For example, knitr has:</p>
-<pre class="yaml"><code>URL: https://yihui.name/knitr/
-BugReports: https://github.com/yihui/knitr/issues</code></pre>
+<p>Every package must have at least one author (aut) and one maintainer (cre) (they might be the same person). The creator must have an email address. These fields are used to generate the basic citation for the package (e.g. <code>citation(&quot;pkgname&quot;)</code>). Only people listed as authors will be included in the auto-generated citation.</p>
 <div id="on-cran" class="section level3">
 <h3>On CRAN</h3>
 <p>The most important thing to note is that your email address (i.e., the address of <code>cre</code>) is the address that CRAN will use to contact you about your package. So make sure you use an email address that’s likely to be around for a while. Also, because this address will be used for automated mailings, CRAN policies require that this be for a single person (not a mailing list) and that it does not require any confirmation or use any filtering.</p>
@@ -314,12 +304,7 @@ COPYRIGHT HOLDER: &lt;Name of the copyright holder&gt;</code></pre></li>
 <li><p><a href="https://tldrlegal.com/license/creative-commons-cc0-1.0-universal">CC0</a>. It relinquishes all your rights on the code and data so that it can be freely used by anyone for any purpose. This is sometimes called putting it in the public domain, a term which is neither well-defined nor meaningful in all countries.</p>
 <p>This license is most appropriate for data packages. Data, at least in the US, is not copyrightable, so you’re not really giving up much. This license just makes this point clear.</p></li>
 </ul>
-<p>If you’d like to learn more about other common licenses, Github’s <a href="https://choosealicense.com/licenses/">choosealicense.com</a> is a good place to start. Another good resource is <a href="https://tldrlegal.com/" class="uri">https://tldrlegal.com/</a>, which explains the most important parts of each license. If you use a license other than the three I suggest, make sure you consult the “Writing R Extensions” section on <a href="https://cran.r-project.org/doc/manuals/R-exts.html#The-DESCRIPTION-file">licensing</a>.</p>
 <p>If your package includes code that you didn’t write, you need to make sure you’re in compliance with its license. Since this occurs most commonly when you’re including C source code, it’s discussed in more detail in <a href="#src">compiled code</a>.</p>
-<div id="on-cran-1" class="section level3">
-<h3>On CRAN</h3>
-<p>If you want to release your package to CRAN, you must pick a standard license. Otherwise it’s difficult for CRAN to determine whether or not it’s legal to distribute your package! You can find a complete list of licenses that CRAN considers valid at <a href="https://svn.r-project.org/R/trunk/share/licenses/license.db" class="uri">https://svn.r-project.org/R/trunk/share/licenses/license.db</a>.</p>
-</div>
 </div>
 <div id="version" class="section level2">
 <h2>Version</h2>
@@ -329,16 +314,12 @@ COPYRIGHT HOLDER: &lt;Name of the copyright holder&gt;</code></pre></li>
 numeric_version(&quot;1.9.0&quot;) &lt; numeric_version(&quot;1.10.0&quot;)
 #&gt; [1] TRUE</code></pre>
 <p>For example, a package might have a version 1.9. This version number is considered by R to be the same as 1.9.0, less than version 1.9.2, and all of these are less than version 1.10 (which is version “one point ten”, not “one point one zero”). R uses version numbers to determine whether package dependencies are satisfied. A package might, for example, import package <code>devtools (&gt;= 1.9.2)</code>, in which case version 1.9 or 1.9.0 wouldn’t work.</p>
-<p>The version number of your package increases with subsequent releases of a package, but it’s more than just an incrementing counter – the way the number changes with each release can convey information about what kind of changes are in the package.</p>
 <p>I don’t recommend taking full advantage of R’s flexibility. Instead always use <code>.</code> to separate version numbers.</p>
 <ul>
 <li><p>A released version number consists of three numbers, <code>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</code>. For version number 1.9.2, 1 is the major number, 9 is the minor number, and 2 is the patch number. Never use versions like <code>1.0</code>, instead always spell out the three components, <code>1.0.0.</code></p></li>
 <li><p>An in-development package has a fourth component: the development version. This should start at 9000. For example, the first version of the package should be <code>0.0.0.9000</code>. There are two reasons for this recommendation: first, it makes it easy to see if a package is released or in-development, and the use of the fourth place means that you’re not limited to what the next version will be. <code>0.0.1</code>, <code>0.1.0</code> and <code>1.0.0</code> are all greater than <code>0.0.0.9000</code>.</p>
-<p>Increment the development version, e.g. from <code>9000</code> to <code>9001</code> if you’ve added an important feature that another development package needs to depend on.</p>
-<p>If you’re using svn, instead of using the arbitrary <code>9000</code>, you can embed the sequential revision identifier.</p></li>
+<p>Increment the development version, e.g. from <code>9000</code> to <code>9001</code> if you’ve added an important feature that another development package needs to depend on.</p></li>
 </ul>
-<p>This advice here is inspired in part by <a href="https://semver.org">Semantic Versioning</a> and by the <a href="https://www.x.org/releases/X11R7.7/doc/xorg-docs/Versions.html">X.Org</a> versioning schemes. Read them if you’d like to understand more about the standards of versioning used by many open source projects.</p>
-<p>We’ll come back to version numbers in the context of releasing your package, <a href="#release-version">picking a version number</a>. For now, just remember that the first version of your package should be <code>0.0.0.9000</code>.</p>
 </div>
 <div id="description-misc" class="section level2">
 <h2>Other components</h2>
