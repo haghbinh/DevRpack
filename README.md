@@ -26,11 +26,11 @@ Supported files and codes for the Talk:
  * [R Code](https://haghbinh.github.io/DevRpack/html/R_Codes.html)
  * [Package Metadata](https://haghbinh.github.io/DevRpack/html/package-meta-data.html)
  * Object Documentation
-   * [Object-oriented programming] (https://haghbinh.github.io/DevRpack/html/OO-vs-Basis.html)
-   * [S3 classes] (https://haghbinh.github.io/DevRpack/html/S3.html)
-   * [R6 classes] (https://haghbinh.github.io/DevRpack/html/R6.html)
-   * [S4 classes] (https://haghbinh.github.io/DevRpack/html/S4.html)
-   * [Trade-offs] (https://haghbinh.github.io/DevRpack/html/OO-tradeoffs.html)
+   * [Object-oriented programming](https://haghbinh.github.io/DevRpack/html/OO-vs-Base.html)
+   * [S3 classes](https://haghbinh.github.io/DevRpack/html/S3.html)
+   * [R6 classes](https://haghbinh.github.io/DevRpack/html/R6.html)
+   * [S4 classes](https://haghbinh.github.io/DevRpack/html/S4.html)
+   * [Trade-offs](https://haghbinh.github.io/DevRpack/html/OO-tradeoffs.html)
  * [Namespace]
  * [External Data]
  * [Compiled Code]
