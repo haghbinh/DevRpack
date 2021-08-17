@@ -26,8 +26,8 @@ Supported files and codes for the Talk:
  * [R Code](https://haghbinh.github.io/DevRpack/html/R_Codes.html)
  * [Package Metadata](https://haghbinh.github.io/DevRpack/html/package-meta-data.html)
  * [Object Documentation]
- ** Test 1
- ** Test 2
+ * * Test 1
+ * * Test 2
  * [Namespace]
  * [External Data]
  * [Compiled Code]
