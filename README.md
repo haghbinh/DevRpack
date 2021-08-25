@@ -1,8 +1,7 @@
-Supported files and codes for the Talk:
+[This website](https://haghbinh.github.io/DevRpack/) 
 # How to Develop an R Package?
 ## By: Hossein Haghbin and Mehdi Maadooliat
 ### August 2021
-[This website](https://haghbinh.github.io/DevRpack/) 
 
 ## Reference:
 ### R packages [\[book\] ](https://r-pkgs.org/)
