@@ -1,10 +1,7 @@
 Supported files and codes for the Talk:
 # How to Develop an R Package?
 ## By: Hossein Haghbin and Mehdi Maadooliat
-
-<img src="img/ISS-Logo.jpg" alt="Diffrent perspective of objects." width="150" height="100">
-
-### You can use the [This website](https://haghbinh.github.io/DevRpack/) to preview the content files.
+[This website](https://haghbinh.github.io/DevRpack/) 
 
 ## Reference:
 ### R packages [\[book\] ](https://r-pkgs.org/)
