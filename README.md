@@ -28,7 +28,7 @@
    * [R6 classes](https://haghbinh.github.io/DevRpack/html/R6.html)
    * [S4 classes](https://haghbinh.github.io/DevRpack/html/S4.html)
    * [Trade-offs](https://haghbinh.github.io/DevRpack/html/OO-tradeoffs.html)
- * [Namespace]
+ * [Namespace](https://haghbinh.github.io/DevRpack/html/Namespace.html)
  * [External Data]
  * [Compiled Code]
  * [Git and GitHub]
